@@ -1,0 +1,18 @@
+<!-- Then in GTM add this listener that fires on page load as  custom HTML tag -->
+
+<script>
+(function() {
+    window.addEventListener('message', function(event) {
+        if (event && event.data && event.data.type === 'logiform_submission') {
+            // Ensure dataLayer exists
+            window.dataLayer = window.dataLayer || [];
+            
+            // Push the event to the dataLayer
+            window.dataLayer.push({
+                event: 'logiform_submission',
+                formData: event.data.data
+            });
+        }
+    });
+})();
+</script>
